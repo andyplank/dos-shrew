@@ -17,7 +17,7 @@ def signalHandler(signalNumber, frame):
     
     sys.exit()
 
-def recieveAndLog(server_port):
+def server(server_port):
     # Attempt to open a socket
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -41,8 +41,9 @@ def recieveAndLog(server_port):
         try:
             # Accept incoming connection from 'address'
             conn, addr = sock.accept()
-
+            print("Connection received from " + str(addr) + "\n")
             while True:
+                print("data received...\n")
                 conn.recv(RECV_BUFFER_SIZE)
 
             sys.stdout.flush()
@@ -60,7 +61,7 @@ def main():
 
     # Parse command line arguments and run server
     if len(sys.argv) != 2:
-        sys.exit("Usage: python server-python.py (Server Port)")
+        sys.exit("Usage: python honest-receiver.py (Server Port)")
     server_port = int(sys.argv[1])
     server(server_port)
 

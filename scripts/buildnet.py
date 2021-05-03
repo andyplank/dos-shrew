@@ -1,5 +1,3 @@
-from mininet.cli import CLI
-from mininet.log import setLogLevel
 from mininet.net import Mininet
 from mininet.topo import Topo
 from mininet.node import OVSSwitch
@@ -16,11 +14,11 @@ class LowRateDoSTopology(Topo):
 		s1 = self.addSwitch('s1')
 
 		# Add links from hosts to switch
-		self.addLink(s1, h1, cls=TCLink, bw=1)
-		self.addLink(s1, h2, cls=TCLink, bw=1)
-		self.addLink(s1, h3, cls=TCLink, bw=1)
+		self.addLink(s1, h1, cls=TCLink, bw=10, rtt="20ms", loss=0)
+		self.addLink(s1, h2, cls=TCLink, bw=10, rtt="20ms", max_queue_size=2, loss=0)
+		self.addLink(s1, h3, cls=TCLink, bw=10, rtt="20ms", loss=0)
 
-def runLowRateDoSTopology():
+def create_topology():
 	# Create an instance of the Low Rate DoS Topology
 	topo = LowRateDoSTopology()
 
@@ -34,13 +32,13 @@ def runLowRateDoSTopology():
 	network.start()
 
 	# Drop user into a mininet CLI session
-	CLI(network)
+	CLI(network, script="cli.sh")
 
 	# When user exits CLI, they will end up here...
 	network.stop()
 
 if __name__ == '__main__':
 	setLogLevel('info')
-	runLowRateDoSTopology()
+	create_topology()
 
 

@@ -1,4 +1,7 @@
 #!/bin/bash
+[ -d "./data" ] && rm -rf ./data
+mkdir data
+sudo mn -c
 
 counter=400
 while [[ $counter -le 5000 ]]
@@ -7,4 +10,3 @@ do
         counter=$((counter + 100))
 done
 
-rm cli.sh

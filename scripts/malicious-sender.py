@@ -7,7 +7,7 @@ def attack(address, port, period, duration):
 
     while True:
         sendtraffic(address, port, duration)
-        time.sleep(period/1000)
+        time.sleep((period-duration)/1000)
 
 def sendtraffic(address, port, duration):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

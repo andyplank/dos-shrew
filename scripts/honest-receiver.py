@@ -4,6 +4,7 @@ import signal
 import os
 import time
 
+SERVER_PORT = 8080
 RECV_BUFFER_SIZE = 2048
 QUEUE_LENGTH = 10
 sock = None
@@ -18,7 +19,7 @@ def signalHandler(signalNumber, frame):
     
     sys.exit()
 
-def server(server_port):
+def server(duration):
     # Attempt to open a socket
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -27,7 +28,7 @@ def server(server_port):
 
     # Attempt to bind socket
     try:
-        sock.bind(('', server_port))
+        sock.bind(('', SERVER_PORT))
     except socket.error as error:
         sys.exit("Failed to bind socket: Error: " + str(error))
 
@@ -45,7 +46,7 @@ def server(server_port):
         start_time = time.time()
         end_time = start_time
         total = 0
-        while end_time < start_time + 30:
+        while end_time < start_time + duration:
             data = conn.recv(RECV_BUFFER_SIZE)
             if not data:
                 break
@@ -67,9 +68,9 @@ def main():
 
     # Parse command line arguments and run server
     if len(sys.argv) != 2:
-        sys.exit("Usage: python honest-receiver.py (Server Port)")
-    server_port = int(sys.argv[1])
-    server(server_port)
+        sys.exit("Usage: python honest-receiver.py (DURATION)")
+    duration = int(sys.argv[1])
+    server(duration)
 
 if __name__ == "__main__":
     main()

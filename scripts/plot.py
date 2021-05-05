@@ -3,7 +3,7 @@ from os import listdir
 from os.path import isfile, join
 
 points = {}
-with open("testdata.txt", 'r') as reader:
+with open("res.txt", 'r') as reader:
     while True:
         x = reader.readline()
         if not x:
@@ -20,4 +20,4 @@ x, y = zip(*sortedPoints)
 plt.plot(x,y)
 plt.xlabel("Period (ms)")
 plt.ylabel("Average KBps throughput")
-plt.savefig('figure4.pdf')
+plt.savefig('Results.pdf')

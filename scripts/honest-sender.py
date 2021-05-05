@@ -2,9 +2,10 @@ import sys
 import socket
 import os
 
+SERVER_PORT = 8080
 SEND_BUFFER_SIZE = 1400
 
-def sendtodst(server_ip, server_port): 
+def sendtodst(server_ip): 
     # Attempt to open a socket
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -13,7 +14,7 @@ def sendtodst(server_ip, server_port):
 
     # Attempt to connect to server
     try:
-        sock.connect((server_ip, server_port))
+        sock.connect((server_ip, SERVER_PORT))
     except socket.error as error:
         sys.exit("Failed to connect socket to end host: Error: " + str(error))
 
@@ -27,11 +28,10 @@ def sendtodst(server_ip, server_port):
 
 def main():
     """Parse command-line arguments and call client function """
-    if len(sys.argv) != 3:
-        sys.exit("Usage: python honest-sender.py (Server IP) (Server Port)")
+    if len(sys.argv) != 2:
+        sys.exit("Usage: python honest-sender.py (Server IP)")
     server_ip = sys.argv[1]
-    server_port = int(sys.argv[2])
-    sendtodst(server_ip, server_port)
+    sendtodst(server_ip)
 
 if __name__ == "__main__":
     main()

@@ -2,6 +2,7 @@ import sys
 import socket
 import signal
 import os
+import time
 
 RECV_BUFFER_SIZE = 2048
 QUEUE_LENGTH = 10
@@ -37,21 +38,26 @@ def server(server_port):
         sys.exit("Failed to bind socket: Error: " + str(error))
 
     # Infinitely accept connections and log their results
-    while True:
-        try:
-            # Accept incoming connection from 'address'
-            conn, addr = sock.accept()
-            print("Connection received from " + str(addr) + "\n")
-            while True:
-                print("data received...\n")
-                conn.recv(RECV_BUFFER_SIZE)
 
-            sys.stdout.flush()
-            conn.close()
-        except socket.error as error:
-            pass
-        except IOError as error:
-            sys.exit("Failed to write to log file: " + str(error))
+    try:
+        # Accept incoming connection from 'address'
+        conn, addr = sock.accept()
+        start_time = time.time()
+        end_time = start_time
+        total = 0
+        while end_time < start_time + 30:
+            data = conn.recv(RECV_BUFFER_SIZE)
+            if not data:
+                break
+            total += len(data)
+            end_time = time.time()
+        print(str(round(total/1000/(end_time-start_time),2)) + "KBps")
+        sys.stdout.flush()
+        conn.close()
+    except socket.error as error:
+        pass
+    except IOError as error:
+        sys.exit("Failed to write to log file: " + str(error))
             
 
 def main():

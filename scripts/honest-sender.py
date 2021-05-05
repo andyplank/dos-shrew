@@ -2,7 +2,7 @@ import sys
 import socket
 import os
 
-SEND_BUFFER_SIZE = 2048
+SEND_BUFFER_SIZE = 1400
 
 def sendtodst(server_ip, server_port): 
     # Attempt to open a socket
@@ -20,10 +20,9 @@ def sendtodst(server_ip, server_port):
     # Infinitely send TCP traffic to the designated recipient
     try:
         while True:
-            sock.send(os.urandom(1024))
+            sock.send(bytearray(SEND_BUFFER_SIZE))
     except socket.error as error:
         sys.exit("Failed to send data to server. Error: " + str(error))
-    
     # Communication succeeded.
 
 def main():

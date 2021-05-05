@@ -17,7 +17,7 @@ class LowRateDoSTopology(Topo):
 
 		# Add links from hosts to switch
 		self.addLink(s1, h1, cls=TCLink, bw=10, delay="1ms", loss=0)
-		self.addLink(s1, h2, cls=TCLink, bw=10, delay="20ms", max_queue_size=10, loss=0)
+		self.addLink(s1, h2, cls=TCLink, bw=1, delay="20ms", max_queue_size=10, loss=0)
 		self.addLink(s1, h3, cls=TCLink, bw=10, delay="1ms", loss=0)
 
 def create_topology():

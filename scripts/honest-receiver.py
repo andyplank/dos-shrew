@@ -1,8 +1,8 @@
 import sys
 import socket
 import signal
-import os
 import time
+import math
 
 SERVER_PORT = 8080
 RECV_BUFFER_SIZE = 2048
@@ -21,6 +21,7 @@ def signalHandler(signalNumber, frame):
 
 def server(duration):
     # Attempt to open a socket
+    socket.setdefaulttimeout(duration)
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     except socket.error as error:
@@ -40,26 +41,27 @@ def server(duration):
 
     # Infinitely accept connections and log their results
 
+    total = 0
+
     try:
         # Accept incoming connection from 'address'
         conn, addr = sock.accept()
         start_time = time.time()
         end_time = start_time
-        total = 0
         while end_time < start_time + duration:
             data = conn.recv(RECV_BUFFER_SIZE)
             if not data:
                 break
             total += len(data)
             end_time = time.time()
-        print(str(round(total/1000/(end_time-start_time),2)) + "KBps")
         sys.stdout.flush()
         conn.close()
     except socket.error as error:
         pass
     except IOError as error:
         sys.exit("Failed to write to log file: " + str(error))
-            
+
+    print(str(math.floor(total/1000/duration)))
 
 def main():
     # Register signal handlers

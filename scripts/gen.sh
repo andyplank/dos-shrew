@@ -8,8 +8,6 @@ fi
 touch res.txt
 sudo mn -c
 
-echo "Burst length $burst ms" > res.txt
-
 duration=$2
 burst=$1
 counter=400
@@ -29,7 +27,7 @@ do
     # Setup h3 as attacker
     echo "h3 python3 malicious-sender.py 10.0.0.2 5000 $counter $burst &" >> cli.sh
     # Wait until test completes
-    echo "h2 sleep $total" >> cli.sh
+    echo "h2 wait" >> cli.sh
     echo "quit" >> cli.sh
     # Save data to file
     echo "$counter" >> res.txt

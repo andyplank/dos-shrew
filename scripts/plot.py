@@ -12,7 +12,7 @@ with open("res.txt", 'r') as reader:
         if not y:
             continue
         x = int(x)
-        y = float(y[:-5])
+        y = int(y)
         points[x] = y
 
 sortedPoints = sorted(points.items())

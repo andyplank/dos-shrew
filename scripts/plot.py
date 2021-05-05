@@ -10,8 +10,8 @@ with open("res.txt", 'r') as reader:
             break
         y = reader.readline()
         if not y:
-            break
-        x = int(x[:-3])
+            continue
+        x = int(x)
         y = float(y[:-5])
         points[x] = y
 

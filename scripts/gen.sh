@@ -14,7 +14,7 @@ duration=$2
 burst=$1
 counter=400
 # Buffer to make sure the results are saved
-total=$(($duation+2))
+total=$(($duration+2))
 while [[ $counter -le 5000 ]]
 do
     echo "-----------------------------------------------------------------"

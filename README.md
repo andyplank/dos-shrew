@@ -1,4 +1,3 @@
-<img src="../../others/images/purdue-cs-logo.jpg" alt="drawing" width="450"/>
 
 # Reproducing Low-Rate TCP-Targeted Denial of Service Attacks
 

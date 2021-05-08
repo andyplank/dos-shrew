@@ -7,10 +7,14 @@
 
  We test the low-rate DoS attacks in four scenarios.
 
+<p float="left">
 <img src="testA.png" alt="drawing" width="200"/>
 <img src="testB.png" alt="drawing" width="200"/>
+</p>
+<p float="left">
 <img src="testC.png" alt="drawing" width="200"/>
 <img src="testD.png" alt="drawing" width="200"/>
+</p>
 
 > Link to GitHub repo: 
 > https://github.com/Aplank14/dos-shrew

@@ -11,8 +11,5 @@
  
 We use Mininet on Amazon EC2 to simulate a simple network of legitimate sender, host and an attacker on a bottleneck link of bandwidth 1mbps. By tuning various parameters, we re-create the results in this paper. We test the low-rate DoS attacks in four scenarios as depicted in the graph below which shows zero throughput for sender up until a square-waveperiod of approximately 1200 m. We also demonstrate the attack using various TCP variants to show the effectiveness of the attack.
 
-<p float="left">
-<img href="https://user-images.githubusercontent.com/32016647/117553305-cd038700-b01e-11eb-8124-c52f3afa502e.png" alt="drawing" width="400"/>
-</p>
 
-<!-- ![multi](https://user-images.githubusercontent.com/32016647/117553305-cd038700-b01e-11eb-8124-c52f3afa502e.png) -->
+![multi](https://user-images.githubusercontent.com/32016647/117553305-cd038700-b01e-11eb-8124-c52f3afa502e.png|width=400)
